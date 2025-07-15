@@ -34,7 +34,7 @@ const Login = () => {
       navigate(from, { replace: true });
     } catch (err) {
       console.error('Login error:', err);
-      setError('Failed to log in. Please check your credentials.');
+      setError(err.message || 'Failed to log in. Please check your credentials.');
     } finally {
       setLoading(false);
     }
@@ -51,6 +51,9 @@ const Login = () => {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white mb-2">Welcome Back</h2>
           <p className="text-gray-400">Sign in to access your TexType account</p>
+          <p className="mt-2 text-sm text-purple-400 border border-purple-400/30 bg-purple-400/10 rounded-lg p-2">
+            Demo account: demo@example.com / password123
+          </p>
         </div>
 
         {error && (

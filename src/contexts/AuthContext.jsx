@@ -23,14 +23,33 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (credentials) => {
-    const userData = await authService.login(credentials);
-    setUser(userData.user);
-    return userData;
+    try {
+      const userData = await authService.login(credentials);
+      setUser(userData.user);
+      return userData;
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    }
   };
 
   const logout = async () => {
-    await authService.logout();
-    setUser(null);
+    try {
+      await authService.logout();
+      setUser(null);
+    } catch (error) {
+      console.error('Logout failed:', error);
+      throw error;
+    }
+  };
+
+  const register = async (userData) => {
+    try {
+      return await authService.register(userData);
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw error;
+    }
   };
 
   const value = {
@@ -38,6 +57,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     logout,
+    register
   };
 
   if (loading) {

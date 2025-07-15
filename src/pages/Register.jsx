@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
-import { authService } from '../services/authService';
+import { useAuth } from '../contexts/AuthContext';
 
 const { FiUser, FiMail, FiLock, FiAlertCircle, FiLoader, FiCheckCircle } = FiIcons;
 
@@ -16,6 +16,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
@@ -44,7 +45,7 @@ const Register = () => {
       setError('');
       setLoading(true);
       
-      await authService.register({ name, email, password });
+      await register({ name, email, password });
       
       setSuccess(true);
       
@@ -52,10 +53,9 @@ const Register = () => {
       setTimeout(() => {
         navigate('/login');
       }, 2000);
-      
     } catch (err) {
       console.error('Registration error:', err);
-      setError('Failed to register. Please try again later.');
+      setError(err.message || 'Failed to register. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -99,6 +99,7 @@ const Register = () => {
               </div>
               <input
                 id="name"
+                name="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -119,6 +120,7 @@ const Register = () => {
               </div>
               <input
                 id="email"
+                name="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -139,6 +141,7 @@ const Register = () => {
               </div>
               <input
                 id="password"
+                name="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -160,6 +163,7 @@ const Register = () => {
               </div>
               <input
                 id="confirm-password"
+                name="confirmPassword"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
