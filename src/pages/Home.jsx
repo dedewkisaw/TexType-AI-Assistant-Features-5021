@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import SafeIcon from '../common/SafeIcon';
+import ArtisticIcon from '../common/ArtisticIcon';
+import CardNeumorphic from '../components/CardNeumorphic';
+import CardGlassmorphic from '../components/CardGlassmorphic';
 
-const { FiChrome, FiCode, FiEdit3, FiBookOpen, FiFileText, FiEye, FiGlobe, FiMail, FiImage, FiUsers, FiShield, FiArrowRight, FiZap, FiTrendingUp } = FiIcons;
+const {
+  FiChrome, FiCode, FiEdit3, FiBookOpen, FiFileText, FiEye, FiGlobe, FiMail, FiImage, FiUsers, FiShield, FiArrowRight, FiZap, FiTrendingUp
+} = FiIcons;
 
 function Home() {
   const fadeInUp = {
@@ -79,7 +83,7 @@ function Home() {
   ];
 
   return (
-    <div>
+    <div className="pt-16">
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -92,7 +96,6 @@ function Home() {
               AI Assistant
             </span>
           </motion.h1>
-          
           <motion.p
             {...fadeInUp}
             transition={{ delay: 0.2 }}
@@ -100,7 +103,6 @@ function Home() {
           >
             Work Smarter, Not Harder! Experience the best Chrome AI sidebar with seamless capabilities to chat, code, write, read, summarize, perform OCR, and translate any web page effortlessly.
           </motion.p>
-
           <motion.div
             {...fadeInUp}
             transition={{ delay: 0.4 }}
@@ -109,17 +111,16 @@ function Home() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl transition-shadow flex items-center space-x-2"
+              className="btn-gradient text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center space-x-2"
             >
               <span>Explore TexType Sidebar</span>
-              <SafeIcon icon={FiArrowRight} />
+              <ArtisticIcon icon={FiArrowRight} />
             </motion.button>
-            
             <Link to="/login">
               <motion.button
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-colors"
+                whileTap={{ scale: 0.98 }}
+                className="btn-neumorphic text-white px-8 py-4 rounded-full font-semibold text-lg"
               >
                 Get Started
               </motion.button>
@@ -144,8 +145,10 @@ function Home() {
                 variants={fadeInUp}
                 className="text-center"
               >
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-gray-400 text-lg">{stat.label}</div>
+                <CardNeumorphic className="p-6">
+                  <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-gray-400 text-lg">{stat.label}</div>
+                </CardNeumorphic>
               </motion.div>
             ))}
           </motion.div>
@@ -155,10 +158,7 @@ function Home() {
       {/* Features Section */}
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            {...fadeInUp}
-            className="text-center mb-16"
-          >
+          <motion.div {...fadeInUp} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Powerful AI Features
             </h2>
@@ -166,7 +166,6 @@ function Home() {
               Discover the comprehensive suite of AI tools designed to enhance your productivity and creativity.
             </p>
           </motion.div>
-
           <motion.div
             variants={staggerChildren}
             initial="initial"
@@ -179,13 +178,14 @@ function Home() {
                 key={index}
                 variants={fadeInUp}
                 whileHover={{ y: -10 }}
-                className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-300"
               >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6`}>
-                  <SafeIcon icon={feature.icon} className="text-white text-2xl" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                <CardGlassmorphic className="p-8 h-full">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6`}>
+                    <ArtisticIcon icon={feature.icon} className="text-white text-2xl" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+                  <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                </CardGlassmorphic>
               </motion.div>
             ))}
           </motion.div>
@@ -195,37 +195,36 @@ function Home() {
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            {...fadeInUp}
-            className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-3xl p-12 border border-white/10"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Transform Your Workflow?
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Join millions of users who have revolutionized their productivity with TexType's AI-powered tools.
-            </p>
-            <Link to="/register">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-12 py-4 rounded-full font-semibold text-xl hover:shadow-2xl transition-shadow"
-              >
-                Start Free Trial
-              </motion.button>
-            </Link>
+          <motion.div {...fadeInUp}>
+            <CardNeumorphic className="p-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Transform Your Workflow?
+              </h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Join millions of users who have revolutionized their productivity with TexType's AI-powered tools.
+              </p>
+              <Link to="/register">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-gradient text-white px-12 py-4 rounded-full font-semibold text-xl"
+                >
+                  Start Free Trial
+                </motion.button>
+              </Link>
+            </CardNeumorphic>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black/20 backdrop-blur-lg border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="nav-neumorphic py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                  <SafeIcon icon={FiZap} className="text-white text-sm" />
+                  <ArtisticIcon icon={FiZap} className="text-white text-sm" />
                 </div>
                 <span className="text-2xl font-bold text-white">TexType</span>
               </div>
@@ -233,28 +232,25 @@ function Home() {
                 The ultimate AI assistant for enhanced productivity and creativity. Work smarter with TexType's comprehensive suite of AI tools.
               </p>
             </div>
-            
             <div>
               <h3 className="text-white font-semibold mb-4">Features</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Chrome Sidebar</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">LLM Comparison</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Email Writer</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Image Generator</a></li>
+                <li><Link to="/dashboard" className="hover:text-white transition-colors">Chrome Sidebar</Link></li>
+                <li><Link to="/dashboard/llm-comparison" className="hover:text-white transition-colors">LLM Comparison</Link></li>
+                <li><Link to="/dashboard/email-writer" className="hover:text-white transition-colors">Email Writer</Link></li>
+                <li><Link to="/dashboard/image-generator" className="hover:text-white transition-colors">Image Generator</Link></li>
               </ul>
             </div>
-            
             <div>
               <h3 className="text-white font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><Link to="/dashboard/settings" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link to="/dashboard/settings" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link to="/dashboard/settings" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/dashboard/settings" className="hover:text-white transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
-          
           <div className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2024 TexType. All rights reserved.</p>
           </div>
